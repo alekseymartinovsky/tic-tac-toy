@@ -1,0 +1,213 @@
+html{
+	background-color: black;
+	color: white;
+}
+
+a{
+	text-decoration: none;
+}
+
+td{
+	width: 60px;
+	height: 60px;
+	border: 1px solid white;
+}
+.main{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#choice{
+	align-self: row-reverse; 	
+}
+#button_choice{
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+#cross{
+	color: red;
+	background: #E4EDF3;
+	border-radius: 5px;
+	font-size: 48px;
+	font-weight: bold;
+	padding: 0 30px;
+
+}
+
+#cross:hover{
+	background: white;
+}
+
+#zero{
+	color: blue;
+	background: #E4EDF3;
+	border-radius: 5px;
+	font-size: 48px;
+	font-weight: bold;
+	padding: 0 30px;
+	margin-left: 10px;
+}
+
+#zero:hover{
+	background: white;
+}
+
+#xo{
+	border: 1px solid white;
+	border-collapse: collapse;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.xStyle{
+	color: red;
+	font-size: 48px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.oStyle{
+	color: blue;
+	font-size: 48px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.winStyle{
+	color: yellow;
+	font-size: 48px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#result{
+	margin: 0 auto;
+	margin-top: 20px;
+	color: yellow;
+	font-size: 32px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#nextGame{
+	text-align: center;
+	margin-top: 20px;
+}
+
+#nextGameButton{
+	color: white;
+	font-size: 24px;
+	border: 1px solid white;
+	padding: 10px 20px;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+#nextGameButton:hover{
+	border-color: yellow;
+	font-size: 26px;
+}
+
+#tableRes{
+	border: 1px solid white;
+	border-collapse: collapse;	
+}
+
+#tableRes td{
+	height: 30px;
+	text-align: center;
+}
+
+#gameRes{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	margin-right: 0px;
+}
+
+@media (max-device-width: 760px){
+	td{
+		width: 200px;
+		height: 200px;
+		border: 3px solid white;
+	}
+
+	#choice{
+		margin-top: 30%;
+		font-size: 48px;
+	}
+
+	#cross{
+		font-size: 144px;
+	}
+
+	#zero{
+		font-size: 144px;
+		margin-left: 100px;
+	}
+
+	#xo{
+		border: 4px solid white;
+		border-collapse: collapse;
+		margin: 0 auto;
+		margin-top: 20%;
+	}
+
+	.oStyle{
+		font-size: 144px;
+		font-weight: 100;
+	}
+
+	.xStyle{
+		font-size: 144px;
+		font-weight: 100;
+	}
+
+	.winStyle{
+		font-size: 144px;
+		font-weight: 100;
+	}
+
+	#result{
+		margin-top: 72px;
+		font-size: 96px;
+	}
+
+	#nextGameButton{
+		font-size: 72px;
+		border: 3px solid white;
+		padding: 10px 20px;
+		border-radius: 20px;
+		margin-top: 72px;
+	}
+
+	#nextGameButton:hover{
+		border-color: yellow;
+		font-size: 78px;
+	}
+
+	#tableRes{
+		border: 3px solid white;
+		border-collapse: collapse;
+		font-size: 48px;	
+	}
+
+	#tableRes td{
+		height: 60px;
+	}
+
+	#gameRes{
+		bottom: 10%;
+		top: auto;
+		right: auto;
+		left: 50%;
+	}
+
+	#tableRes{
+		position: relative;
+		left: -50%;
+	}
+
+}

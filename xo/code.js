@@ -1,4 +1,17 @@
-var game = {
+game = {
+	start(select){
+		this.setSymbol(select);
+		document.getElementById('choice').hidden = true;
+		document.getElementById('xo').hidden = false;
+		document.getElementById('clear').hidden = true;
+		firstStep = random(0, 1);
+		if(firstStep == 0){
+			this.step = 'user';
+		}else{
+			this.step = 'computer';
+			computer.firstStep();
+		}
+	},
 	userSymbol: '',
 	computerSymbol: '',
 	setSymbol(select){
@@ -20,7 +33,57 @@ var game = {
 	win: 'none',
 	winComputer: 0,
 	winUser: 0,
+	loadRes(){
+		if(localStorage.getItem('winComputer') != null){
+			this.winComputer = Number(localStorage.getItem('winComputer'));	
+		}else{
+			localStorage.setItem('winComputer', '0');
+		}
+		if(localStorage.getItem('winUser') != null){
+			this.winUser = Number(localStorage.getItem('winUser'));	
+		}else{
+			localStorage.setItem('winUser', '0');
+		}
+		document.getElementById('resComputer').textContent = this.winComputer;
+		document.getElementById('resUser').textContent = this.winUser;
+	},
+	saveRes(name){
+		this.win = win;
+		if(name == 'computer'){
+			this.winComputer += 1;
+			localStorage.setItem('winComputer', this.winComputer);
+		}
+		if(name == 'user'){
+			this.winUser += 1;
+			localStorage.setItem('winUser', this.winUser);
+		}
+		if(name == 'dead heat'){
+			this.winComputer += 0.5;
+			this.winUser += 0.5;
+			localStorage.setItem('winComputer', this.winComputer);
+			localStorage.setItem('winUser', this.winUser);
+		}
+	},
+	nextGame(){
+		field.clean();
+		computer.moveNumber = 0;
+		document.getElementById('xo').hidden = true;
+		document.getElementById('nextGameButton').hidden = true;
+		document.getElementById('result').hidden = true;
+		document.getElementById('choice').hidden = false;
+		document.getElementById('clear').hidden = false;
+		this.win = 'none';
+	},
+	clearRes(){
+		localStorage.setItem('winComputer', '0');
+		localStorage.setItem('winUser', '0');
+		this.winComputer = 0;
+		this.winUser = 0;
+		document.getElementById('resComputer').textContent = '0';
+		document.getElementById('resUser').textContent = '0';
+	}
 }
+game.loadRes();
 
 var computer= {
 	firstStep(){
@@ -166,6 +229,14 @@ var field = { //если юзер, то ставит 1, если пк, то ст
 			[10, 10, 10],
 			[10, 10, 10]
 			],
+	touch(i,j){
+		if((game.step == 'user') && (game.win == 'none')){
+			this.fillCell(i, j);
+			if(game.win == 'none'){
+				setTimeout(computer.computerMove, 300);
+			}
+		}
+	},
 	fillCell(i, j){
 		if(this.table[i][j] == 10){
 			let id = 'cell_'+i+j;
@@ -199,11 +270,9 @@ var field = { //если юзер, то ставит 1, если пк, то ст
 			}
 			if((resString == 0) || (resColumn == 0)){
 				win = 'computer';
-				game.winComputer++;
 			}
 			if((resString == 3) || (resColumn == 3)){
 				win = 'user';
-				game.winUser++;
 			}
 		}
 		//проверка диагоналей на победу
@@ -215,11 +284,9 @@ var field = { //если юзер, то ставит 1, если пк, то ст
 		}
 		if((resGeneralDiagonal == 0) || (resSideDiagonal == 0)){
 				win = 'computer';
-				game.winComputer++;
 			}
 			if((resGeneralDiagonal == 3) || (resSideDiagonal == 3)){
 				win = 'user';
-				game.winUser++;
 		}
 		let deadHeat = 0;
 		if(win == 'none'){
@@ -230,15 +297,14 @@ var field = { //если юзер, то ставит 1, если пк, то ст
 			}
 			if(deadHeat <= 9){
 				win = 'dead heat';
-				game.winComputer += 0.5;
-				game.winUser += 0.5;
+				game.saveRes(win);
 			}
 		}
 
 		//результат
 		if(win != 'none'){
-			game.win = win;
 			if(win != 'dead heat'){
+				game.saveRes(win);
 				this.winStyle();
 			}
 			document.getElementById('result').textContent = game.win;
@@ -321,42 +387,10 @@ var field = { //если юзер, то ставит 1, если пк, то ст
 	}
 }
 
-function start(select){ 
-	game.setSymbol(select);
-	document.getElementById('choice').hidden = true;
-	document.getElementById('xo').hidden = false;
-	firstStep = random(0, 1);
-	if(firstStep == 0){
-		game.step = 'user';
-	}else{
-		game.step = 'computer';
-		computer.firstStep();
-	}
-}
-
-function touch(i, j){
-	if((game.step == 'user') && (game.win == 'none')){
-		field.fillCell(i, j);
-		if(game.win == 'none'){
-			setTimeout(computer.computerMove, 300);
-		}
-	}
-}
-
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 }
 
 function log(param){
 	console.log(param);
-}
-
-function nextGame(){
-	field.clean();
-	computer.moveNumber = 0;
-	document.getElementById('xo').hidden = true;
-	document.getElementById('nextGameButton').hidden = true;
-	document.getElementById('result').hidden = true;
-	document.getElementById('choice').hidden = false;
-	game.win = 'none';
 }

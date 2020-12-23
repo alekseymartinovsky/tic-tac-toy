@@ -127,6 +127,18 @@ td{
 	margin-right: 0px;
 }
 
+#clear{
+	position: absolute;
+	color: white;
+	font-size: 12px;	
+	bottom: 10px;
+	right: 10px;
+}
+
+#clear:hover{
+	color: yellow;
+}
+
 @media (max-device-width: 760px){
 	td{
 		width: 200px;
@@ -199,7 +211,7 @@ td{
 	}
 
 	#gameRes{
-		bottom: 10%;
+		bottom: 30%;
 		top: auto;
 		right: auto;
 		left: 50%;
@@ -210,4 +222,8 @@ td{
 		left: -50%;
 	}
 
+	#clear{
+		font-size: 36px;
+		bottom: 5%;
+	}
 }

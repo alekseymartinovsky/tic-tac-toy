@@ -1,2 +1,2 @@
 # tic-tac-toy
-This is a game Tic-Tac-Toy implemented as a single-page website
+Крестики-нолики - SPA, данные об игре и таблица результатов храняться в localstorage, адаптивность при помощи media-запросов
